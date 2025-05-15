@@ -13,12 +13,6 @@ pip install -r requirements.txt
 
 Please download the data from: `<LINK>`
 
-Then, run the following to update the data split:
-
-```bash
-python /pretrain_comparison/comparison/config/update_data_split.py --data_path </your/data/path>
-```
-
 ## initlize the config files
 
 please run:
