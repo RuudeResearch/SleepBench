@@ -1,0 +1,27 @@
+ALL_CHANNELS_full: [ 
+                'F3-M2',
+                'F4-M1',
+                'C3-M2',
+                'C4-M1',
+                'O1-M2',
+                'O2-M1',
+                'E1-M2',
+                'Chin1-Chin2',
+                'ABD',
+                'CHEST',
+                'AIRFLOW',
+                'SaO2',
+                'ECG'
+              ]
+CHANNEL_DATA: {
+                "Respiratory": ["CHEST", "SaO2", "ABD"],
+                "Sleep_Stages": ["C3-M2", "C4-M1", "O1-M2", "O2-M1", "E1-M2"],
+                "EKG": ["ECG"], 
+              }
+
+CHANNEL_GROUPS: {
+                "RESP": ["CHEST", "SPO2", "ABD", "NASAL", "ORAL", "PPG"],
+                "BAS": ["C3-M2", "C4-M1", "O1-M2", "O2-M1", "E1-M2", "E2-M1", "FP1-M2", "FP2-M1"],
+                "EKG": ["ECG"], 
+                "EMG": ["CHIN", "LEG"]
+              }

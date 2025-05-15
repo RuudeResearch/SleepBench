@@ -1,0 +1,44 @@
+# model config
+model_params:
+  embed_dim: 512
+  num_heads: 4
+  num_layers: 1
+  num_classes: 5
+  pooling_head: 4
+  dropout: 0.3
+  # max_seq_length: 180
+  max_seq_length: 8196
+
+
+context: -1
+seed: 42
+
+batch_size: 9
+patience: 30
+epochs: 30
+lr: 0.0005
+num_workers: 8
+accumulation_steps: 16
+
+# dataloader configs
+max_files:
+val_size: 
+sampling_freq: 128
+
+ahi_labels_path: '/oak/stanford/groups/mignot/projects/SleepBenchTest/data/labels/labels/ahi_stats_labels_not_normalized_outliers_removed.csv'
+death_labels_path: '/oak/stanford/groups/mignot/projects/SleepBenchTest/data/labels/labels/phewas_tte_prediction_10_18_24_num_labels_1042'
+demographics_labels_path: '/oak/stanford/groups/mignot/projects/SleepBenchTest/data/labels/labels/demographics_info_10_14_24.csv'
+diagnosis_labels_path: '/oak/stanford/groups/mignot/projects/SleepBenchTest/data/labels/labels/phewas_tte_prediction_10_18_24_num_labels_12'
+labels_path: '/oak/stanford/groups/mignot/projects/SleepBenchTest/data/labels/labels/sleep_stages'
+embedding_path: '/oak/stanford/groups/mignot/projects/SleepBenchTest/pretrain_comparison/output/final_embeddings'
+split_path: '/oak/stanford/groups/mignot/projects/SleepBenchTest/pretrain_comparison/comparison/config/SSC_dataset_split_new.json'
+
+save_path: '/oak/stanford/groups/mignot/projects/SleepBenchTest/pretrain_comparison/output/results'
+
+pretrain_type: ['CL_pairwise_epochs_36']
+dataset: 'ssc_stanford'
+channel_like: ["BAS", "RESP", "EKG", "EMG"]
+
+class_labels: ['W', 'N1', 'N2', 'N3', 'REM']
+
+wandb: false

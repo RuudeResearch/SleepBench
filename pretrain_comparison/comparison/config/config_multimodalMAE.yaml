@@ -1,0 +1,47 @@
+split_path: '/oak/stanford/groups/mignot/projects/SleepBenchTest/pretrain_comparison/comparison/config/SSC_dataset_split_new.json'
+save_path: '/oak/stanford/groups/mignot/projects/SleepBenchTest/pretrain_comparison/output/final_models'
+checkpoint_path:
+
+# model config
+seed: 42
+model: 'MAE'
+in_channels: 1
+batch_size: 256
+epochs: 1000
+lr: 0.001
+lr_step_period: 2
+gamma: 0.1
+temperature: 0.0
+momentum: 0.9
+num_workers: 18
+embed_dim: 128
+num_heads: 8
+num_layers: 6
+pooling_head: 8
+dropout: 0.3
+weight_decay: 0.0
+mode: "MAE"
+save_iter: 500
+eval_iter: 500
+log_interval: 1
+accumulation_interval: 2
+use_wandb: false
+mask_ratio: 0.34
+patience: 35
+
+# dataloader configs
+BAS_CHANNELS: 8
+RESP_CHANNELS: 5
+EKG_CHANNELS: 1
+EMG_CHANNELS: 2
+max_files:
+val_size: 100
+sampling_duration: 5
+sampling_freq: 128
+patch_size: 640
+
+channel_groups_path: '/oak/stanford/groups/mignot/projects/SleepBenchTest/pretrain_comparison/comparison/config/channel_groups.json'
+
+modality_types: ["BAS", "RESP", "EKG", "EMG"]
+channels: ['CHEST', 'SPO2', 'ABD', 'NASAL', 'ORAL', 'C3-M2', 'C4-M1', 'O1-M2', 'O2-M1',
+  'E1-M2', 'E2-M1', 'FP1-M2', 'FP2-M1', 'ECG', 'CHIN', 'LEG']
