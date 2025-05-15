@@ -11,7 +11,7 @@ pip install -r requirements.txt
 
 ## 📥 Data Download
 
-Please download the data from: `<LINK>`
+Please download the data from: `<LINK GIVEN IN OPENREVIEW>`
 
 ## initlize the config files
 
@@ -76,5 +76,5 @@ Then, open and run the appropriate notebook:
 
 ## 📊 Evaluate Performance
 
-to evaluate the performance please cd into `/pretrain_comparison/evaluation` and run the notebooks for the results you want to generate. Corresponding files will be generated in `/pretrain_comparison/output/results`
+To evaluate the performance please cd into `/pretrain_comparison/evaluation` and run the notebooks for the results you want to generate. Corresponding files will be generated in `/pretrain_comparison/output/results`
 
