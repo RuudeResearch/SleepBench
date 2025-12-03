@@ -11,7 +11,7 @@ pip install -r requirements.txt
 
 ## 📥 Data Download
 
-Please download the data from: `<LINK GIVEN IN OPENREVIEW>`
+Please download the data from: `https://doi.org/10.60508/0ta5-v163`
 
 ## initlize the config files
 
