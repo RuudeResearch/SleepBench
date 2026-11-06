@@ -1,0 +1,64 @@
+# Pre-training settings. `common` applies to every method; each method adds or overrides
+# keys. Paths (split, channel groups, save directory) are filled in by run.py.
+# The ten main models are the first eight methods plus the two baselines (no pre-training,
+# see sleepbench/embed.py); the *_mask34 methods are the masking-rate ablation.
+
+common:
+  seed: 42
+  in_channels: 1
+  batch_size: 256
+  lr: 0.001
+  lr_step_period: 2
+  gamma: 0.1
+  temperature: 0.0
+  momentum: 0.9
+  embed_dim: 128
+  num_heads: 8
+  num_layers: 6
+  pooling_head: 8
+  dropout: 0.3
+  weight_decay: 0.0
+  save_iter: 500
+  eval_iter: 500
+  log_interval: 1
+  accumulation_interval: 2
+  patience: 35
+  use_wandb: false
+  checkpoint_path: null
+  epochs: 1000            # upper bound; MAE/DAE training stops early on the validation loss
+  num_workers: 18
+  # data
+  BAS_CHANNELS: 8
+  RESP_CHANNELS: 5
+  EKG_CHANNELS: 1
+  EMG_CHANNELS: 2
+  max_files: null
+  val_size: 100           # validation recordings (random draw) used for the validation loss
+  sampling_duration: 5    # minutes per sample
+  sampling_freq: 128
+  patch_size: 640         # 5-second patches
+  modality_types: [BAS, RESP, EKG, EMG]
+  channels: [CHEST, SPO2, ABD, NASAL, ORAL, C3-M2, C4-M1, O1-M2, O2-M1, E1-M2, E2-M1,
+             FP1-M2, FP2-M1, ECG, CHIN, LEG]
+
+methods:
+  # trainer: module in sleepbench/pretrain; model/mode: names used by the trainer
+  # CL: no early stopping; the encoders used in the paper are the checkpoints saved after
+  # epoch 3 (0-based), batch 499, so training stops after epoch 3 (constant learning rate)
+  cl_pairwise:    {trainer: train_cl, model: CL, mode: pairwise, epochs: 4, num_workers: 16,
+                   input_size: 640, output_size: 128, max_seq_len: 60, mask_ratio: 0.34,
+                   embed_checkpoint: '*_epoch_3_batch_499.pt'}
+  cl_loo:         {trainer: train_cl, model: CL, mode: leave_one_out, epochs: 4, num_workers: 16,
+                   input_size: 640, output_size: 128, max_seq_len: 60, mask_ratio: 0.34,
+                   embed_checkpoint: '*_epoch_3_batch_499.pt'}
+  mae:            {trainer: train_mae, model: MAE, mode: MAE, mask_ratio: 0.75}
+  mae_masked:     {trainer: train_mae_masked, model: MAE_masked, mode: MAE_masked, mask_ratio: 0.75}
+  fft_mae:        {trainer: train_fft_mae, model: FFT_min, mode: FFT_min, mask_ratio: 0.75}
+  fft_mae_masked: {trainer: train_fft_mae_masked, model: FFT_min_masked, mode: FFT_min_masked, mask_ratio: 0.75}
+  dae:            {trainer: train_dae, model: noise, mode: noise, mask_ratio: 0.0, num_workers: 22}
+  fft_dae:        {trainer: train_fft_dae, model: FFT_min_noise, mode: FFT_min_noise, mask_ratio: 0.0, num_workers: 22}
+  # masking-rate ablation (34%)
+  mae_mask34:            {trainer: train_mae, model: MAE, mode: MAE, mask_ratio: 0.34}
+  mae_masked_mask34:     {trainer: train_mae_masked, model: MAE_masked, mode: MAE_masked, mask_ratio: 0.34}
+  fft_mae_mask34:        {trainer: train_fft_mae, model: FFT_min, mode: FFT_min, mask_ratio: 0.34}
+  fft_mae_masked_mask34: {trainer: train_fft_mae_masked, model: FFT_min_masked, mode: FFT_min_masked, mask_ratio: 0.34}

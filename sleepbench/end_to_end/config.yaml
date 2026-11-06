@@ -1,0 +1,41 @@
+# End-to-end supervised baseline: the pre-training encoder architecture plus the downstream
+# head, randomly initialised and trained jointly on raw PSG. Paths are filled in by train.py.
+common:
+  input_size: 640
+  tokens_per_chunk: 60          # 5-second tokens per 5-minute chunk
+  encoder_output_size: 128
+  encoder_num_heads: 8
+  encoder_num_layers: 6
+  encoder_dropout: 0.1
+  encoder_chunks_per_pass: 4    # 5-minute chunks per encoder sub-batch
+  model_params:
+    embed_dim: 512
+    num_heads: 4
+    num_layers: 1
+    num_classes: 5
+    pooling_head: 4
+    dropout: 0.3
+    max_seq_length: 8196
+  num_diagnosis: 12
+  seed: 42
+  batch_size: 4
+  patience: 8
+  epochs: 5
+  lr: 0.0005
+  num_workers: 4
+  accumulation_steps: 1
+  max_chunks_per_recording: 96  # up to 8 hours
+  sampling_freq: 128
+  max_files: null
+  val_size: null
+  apnea_labels_path: null
+  use_apnea_csv: false
+  dataset: ssc_stanford
+  class_labels: [W, N1, N2, N3, REM]
+  wandb: false
+  strict_io: true
+
+tasks:
+  sleep_age: {}
+  ahi: {lr: 0.0001, patience: 5}
+  death_diagnosis: {lr: 0.0001, patience: 5, batch_size: 32, max_chunks_per_recording: 24}  # first 2 h

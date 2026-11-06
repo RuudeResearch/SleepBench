@@ -1,0 +1,5 @@
+# Recordings whose HDF5 file could not be opened (bad object header). They are removed from
+# the download; this list keeps the end-to-end baseline from failing on older copies.
+SSC_2004_1811767863
+SSC_2006_6900057716
+SSC_2006_8956982463

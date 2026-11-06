@@ -1,0 +1,16 @@
+# Copy to paths.yaml and edit. Everything else is derived from these entries.
+
+# Root of the Stanford Sleep Bench download (https://doi.org/10.60508/0ta5-v163).
+# Expected inside: SSC_pre_2015/SSC_pre_2015/*.hdf5 and labels/labels/...
+data_root: /path/to/sleepbench_data
+
+# Everything this code writes: checkpoints, embeddings, run configs, results, tables, figures.
+# Embeddings need ~230 GB per model (~3.2 TB for all 14 models).
+output_root: /path/to/sleepbench_outputs
+
+# Optional overrides if your copy is laid out differently:
+# ssc_hdf5_dir: /path/to/SSC_pre_2015
+# labels_dir: /path/to/labels
+# Study ID -> StanfordSleepBenchID (one ID per individual), distributed with the data.
+# Used to resample individuals in the bootstrap; if missing, recordings are resampled.
+# subject_ids_csv: /path/to/SleepBench_StanfordSleepBenchID.csv
